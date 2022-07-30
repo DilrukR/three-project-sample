@@ -8,7 +8,6 @@ import Box from "./Components/box";
 import Sphere from "./Components/animatedspahere";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import Model from "./Components/Model";
 
 function App() {
   return (
