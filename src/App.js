@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+
+import "./App.css";
+import styled from "styled-components";
+import Background from "./Components/background";
+import TextSection from "./Components/textsection";
+import Box from "./Components/box";
+import Sphere from "./Components/animatedspahere";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import Model from "./Components/Model";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper className='App'>
+      <Background />
+      <TextSection />
+      <Canvas className='Canvas'>
+        <OrbitControls enableZoom={false} />
+        <ambientLight intensity={[0.5]} />
+        <directionalLight
+          position={[-2, 5, 2]}
+          intensity={[2]}
+          castShadow={true}
+        />
+        <Suspense fallback={null} />
+
+        <Box />
+      </Canvas>
+      <Canvas className='Canvas'>
+        <OrbitControls enableZoom={false} />
+        <ambientLight intensity={[0.5]} />
+        <spotLight intensity={[0.5]} />
+        <directionalLight position={[-5, 5, 2]} intensity={[2]} />
+        <Suspense fallback={null} />
+
+        <Sphere />
+      </Canvas>
+    </Wrapper>
   );
 }
 
 export default App;
+
+const Wrapper = styled.div`
+  position: relative;
+  background: 1f1144;
+
+  Canvas {
+    min-height: 1000px;
+  }
+
+  Canvas2 {
+    min-height: 500px;
+  }
+`;
